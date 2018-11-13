@@ -1,0 +1,5 @@
+# disks
+KERNEL=="nvme[1-99]n[0-99]" , ENV{DEVTYPE}=="disk" , RUN+="/bin/bash -c 'ln -s /dev/%k `python /usr/local/bin/nvme.py /dev/%k` '"
+
+# partitions
+KERNEL=="nvme[1-99]n[0-99]p[0-99]" , ENV{DEVTYPE}=="partition", RUN+="/bin/bash -c 'ln -s /dev/%k `python /usr/local/bin/nvme.py /dev/%k`$(echo %k|cut -dp -f2) '"
